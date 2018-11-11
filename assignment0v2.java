@@ -127,10 +127,8 @@ public class assignment0v2
 		 			//Pass the user input for leftright move into method assignCarSpotLeftRight.
 		 			carGrid = assignCarSpotLeftRight(user_leftright, carGrid, row1, col1, carColorRandom);
 
-
-
 		 			//if the user makes a move that is valid left right, then we update the COLUMNs
-		 			if ((user_leftright >= 0) && (user_leftright + col1 <= 20))
+		 			if ((user_leftright >= 0) && (user_leftright + col1 < 20))
 		 			{
 		 				col1 = col1 + user_leftright;
 		 			}
@@ -256,7 +254,7 @@ public class assignment0v2
 		{
 			//System.out.println("Scenerio 1 Horzintal Out of bounds: " + (col1_orig + user_leftright >= 20));
 			System.out.println();
-			System.out.println("Please try again with a valid number within bounds!!" + "\n");
+			System.out.println("Your go right goes out of bounds. Please try again and remain within bounds!" + "\n");
 			
 			// Return the original grid that has been untouched.
 			return carGrid;
@@ -269,7 +267,7 @@ public class assignment0v2
 		{
 			//System.out.println("Scenerio 2 Horizontal Out of bounds: " + (col1_orig + user_leftright < 0));
 			System.out.println();
-			System.out.println("You chosen a value goes out of bounds for the X Coordinate!" + "\n");
+			System.out.println("Your go left goes out of bounds. Please try again and remain within bounds!" + "\n");
 			
 			//Return the original Grid that has been untouched.
 			return carGrid;
@@ -301,13 +299,13 @@ public class assignment0v2
 		if ((row1_orig + user_UpDown >= 20))
 		{
 			//System.out.println("Scenerio 1 Vertical Out of bounds: " + (row1_orig + user_UpDown >= 20));
-			//System.out.println("You chosen a value that goes out of bounds for the Y coordinates!");
+			System.out.println("You chosen a value that goes out of bounds for the Y coordinates!");
 			return carGrid;
 		}
 		else if ((user_UpDown < 0) && (row1_orig + user_UpDown < 0))
 		{
 			//System.out.println("Scnerio 2 Vertical Out of bounds: " + (row1_orig + user_UpDown < 0));
-			//System.out.println("You chosen a value that goes out of bounds for the Y coordinates!");
+			System.out.println("You chosen a value that goes out of bounds for the Y coordinates!");
 			return carGrid;
 		}
 
