@@ -115,27 +115,64 @@ public class assignment0v2
 		 		System.out.print("What direction would you like to move the car (1 - horizontal; 2 - vertical)? ");
 		 		int user_direction = scanner.nextInt();
 
+		 		//The user chooses 1. Then the user wants to move the car horizontally.
 		 		if (user_direction == 1)
 		 		{
+		 			//The car will move left if the value is negative. Move right if positive numbers.
 		 			System.out.print("How far (negative value to move left)? ");
+		 			
+		 			//Wait for user input integer and store it in user_leftright
 		 			int user_leftright = scanner.nextInt();
-		 			assignCarSpotLeftRight(user_leftright, carGrid, row1, col1, carColorRandom);
-		 			print_array(carGrid);
-		 			col1 = col1 + user_leftright;
+
+		 			//Pass the user input for leftright move into method assignCarSpotLeftRight.
+		 			carGrid = assignCarSpotLeftRight(user_leftright, carGrid, row1, col1, carColorRandom);
+
+
+
+		 			//if the user makes a move that is valid left right, then we update the COLUMNs
+		 			if ((user_leftright >= 0) && (user_leftright + col1 <= 20))
+		 			{
+		 				col1 = col1 + user_leftright;
+		 			}
+
+		 			//If the user enters negative value, then we move left. 
+		 			//Check if the move is OOB with user_leftright + col1 > 0
+		 			else if ((user_leftright < 0) && (user_leftright + col1 >= 0))
+		 			{
+		 				col1 = col1 + user_leftright;
+		 			}
 		 		}
 
 		 		if (user_direction == 2)
 		 		{
+		 			// Ask the user to how far UP (negative) or DOWN (Positive) value.
+		 			System.out.println();
 		 			System.out.print("How far up (negative value will move car up; positive value will move the car down) ");
+
+		 			// Wait for user input and then store it in user_UpDown variable
 		 			int user_UpDown = scanner.nextInt();
-		 			assignCarSpotUpDown(user_UpDown, carGrid, row1, col1, carColorRandom);
-		 			print_array(carGrid);
-		 			row1 = row1 + user_UpDown;
+		 			System.out.println();
+
+		 			// Pass the user input for UpDown move into method assignCarSpotUpDown.
+		 			carGrid = assignCarSpotUpDown(user_UpDown, carGrid, row1, col1, carColorRandom);
+		 			
+		 			// if the user makes a move that is valid up/down, then we update the ROWS for up/down moves. 
+		 			//if user enters POSITIVE value. Move Positive down, check if less than 20 and if userinput is greater than 0.
+		 			if ((user_UpDown >= 0) && (user_UpDown + row1 <= 20))
+		 			{
+		 				row1 = row1 + user_UpDown;
+		 			}
+		 			// If the user enters a NEGATIVE value, then we move UP.
+		 			// Check if the move is OOB with user_UpDown + row1 > 0
+		 			else if ((user_UpDown < 0) && (user_UpDown + row1 >= 0))
+		 			{
+		 				row1 = row1 + user_UpDown;
+		 			}
 		 		}
 		 	}
 		 	else
 		 	{
-		 		System.out.println("Please turn the ignition on first before moving the car!");
+		 		System.out.println("Please turn the ignition on first before moving the car!" + "\n");
 		 	}
 
 		 }
@@ -183,7 +220,7 @@ public class assignment0v2
 		return carIgnition;
 	}
 
-	// method returns a char[][]. Initialize and declare the 2d array here.
+	// Method returns a char[][]. Initialize and declare the 2d array here.
 	public static char[][] create2DcarGrid(int row1)
 	{
 		char[][] carGrid = new char[row1][row1]; // initialize and declare the 2d array
@@ -198,7 +235,7 @@ public class assignment0v2
 		return carGrid; // return the 2D array
 	}
 
-	// method used for moving the car leftRight horizontally.
+	// Method to move the car position LeftRight if boundary conditions are met in 20x20 grid. 
 	public static char[][] assignCarSpotLeftRight(int user_leftright, char[][] carGrid, int row1, int col1, char carColorRandom)
 	{
 		//We are going to assign the given coordinates into the coordinate plane. Assign coordinate using row1, col1 
@@ -213,24 +250,36 @@ public class assignment0v2
 		//System.out.println("row1: " + Integer.toString(row1));
 		//System.out.println("col1: " + Integer.toString(col1));
 
-		
-		if ((col1_orig + user_leftright >= 20))
+
+		//If the user enters a left right movement where it goes greater than the 20 unit grid, left right, this violates boundaries. 		
+		if ((col1_orig + user_leftright > 20))
 		{
-			System.out.println("Scenerio 1 Horzintal Out of bounds: " + (col1_orig + user_leftright >= 20));
-			System.out.println("You chosen a value goes out of bounds for the X Coordinate!");
-			System.out.println("Please try again with a valid number within bounds!!");
-			print_array(carGrid);
-			System.exit(0);
+			//System.out.println("Scenerio 1 Horzintal Out of bounds: " + (col1_orig + user_leftright >= 20));
+			System.out.println();
+			System.out.println("Please try again with a valid number within bounds!!" + "\n");
+			
+			// Return the original grid that has been untouched.
+			return carGrid;
+			//print_array(carGrid);
+			
+			//System.exit(0);
 		}
+		//if the user enters a left right movement where it goes less than coordinates of 0, then we print and return below statement.
 		else if ((user_leftright < 0) && (col1_orig + user_leftright < 0))
 		{
-			System.out.println("Scenerio 2 Horizontal Out of bounds: " + (col1_orig + user_leftright < 0));
-			System.out.println("You chosen a value goes out of bounds for the X Coordinate!");
-			print_array(carGrid);
-			System.exit(0);
+			//System.out.println("Scenerio 2 Horizontal Out of bounds: " + (col1_orig + user_leftright < 0));
+			System.out.println();
+			System.out.println("You chosen a value goes out of bounds for the X Coordinate!" + "\n");
+			
+			//Return the original Grid that has been untouched.
+			return carGrid;
+			//print_array(carGrid);
+			
+			//System.exit(0);
 		}
 		
-
+		// If there is nothing wrong with the out of bounds, then we proceed to update the left right position here 
+		// of the carGrid. 
 		else 
 		{
 			carGrid[row1_orig][col1_orig] = '-';  // take the original X car position and make it into '-'.
@@ -240,38 +289,36 @@ public class assignment0v2
 		return carGrid;  // return to the caller a 2d char data type array.
 	}
 
+	// Method to move car Up Down.
 	public static char[][] assignCarSpotUpDown(int user_UpDown, char[][] carGrid, int row1, int col1, char carColorRandom)
 	{
 		int row1_orig = row1;
-		//System.out.println("row1_orig" + Integer.toString(row1_orig));
-
 		int col1_orig = col1;
-		//System.out.println("col1_orig" + Integer.toString(col1_orig));
 
 		row1 = row1 + (user_UpDown);
-		//System.out.println("row1: " + Integer.toString(row1));
-		//System.out.println("col1: " + Integer.toString(col1));
 
+		// If the user enters value that goes above the upDown boundaries, then we return the carGrid original state.
 		if ((row1_orig + user_UpDown >= 20))
 		{
-			System.out.println("Scenerio 1 Vertical Out of bounds: " + (row1_orig + user_UpDown >= 20));
-			System.out.println("You chosen a value that goes out of bounds for the Y coordinates!");
-			print_array(carGrid);
-			System.exit(0);
+			//System.out.println("Scenerio 1 Vertical Out of bounds: " + (row1_orig + user_UpDown >= 20));
+			//System.out.println("You chosen a value that goes out of bounds for the Y coordinates!");
+			return carGrid;
 		}
 		else if ((user_UpDown < 0) && (row1_orig + user_UpDown < 0))
 		{
-			System.out.println("Scnerio 2 Vertical Out of bounds: " + (row1_orig + user_UpDown < 0));
-			System.out.println("You chosen a value that goes out of bounds for the Y coordinates!");
-			print_array(carGrid);
-			System.exit(0);
+			//System.out.println("Scnerio 2 Vertical Out of bounds: " + (row1_orig + user_UpDown < 0));
+			//System.out.println("You chosen a value that goes out of bounds for the Y coordinates!");
+			return carGrid;
 		}
 
+		//If there is nothing wrong with out of bounds, update the position of the car with UPDOWN move.
 		else
 		{
 			carGrid[row1_orig][col1_orig] = '-';
 			carGrid[row1][col1] = carColorRandom;
 		}
+
+		//Return the carGrid. 
 		return carGrid;
 	}
 }
