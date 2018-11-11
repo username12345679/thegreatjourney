@@ -156,7 +156,7 @@ public class assignment0v2
 		 			
 		 			// if the user makes a move that is valid up/down, then we update the ROWS for up/down moves. 
 		 			//if user enters POSITIVE value. Move Positive down, check if less than 20 and if userinput is greater than 0.
-		 			if ((user_UpDown >= 0) && (user_UpDown + row1 <= 20))
+		 			if ((user_UpDown >= 0) && (user_UpDown + row1 < 20))
 		 			{
 		 				row1 = row1 + user_UpDown;
 		 			}
@@ -250,7 +250,7 @@ public class assignment0v2
 
 
 		//If the user enters a left right movement where it goes greater than the 20 unit grid, left right, this violates boundaries. 		
-		if ((col1_orig + user_leftright > 20))
+		if ((col1_orig + user_leftright >= 20))
 		{
 			//System.out.println("Scenerio 1 Horzintal Out of bounds: " + (col1_orig + user_leftright >= 20));
 			System.out.println();
@@ -299,13 +299,13 @@ public class assignment0v2
 		if ((row1_orig + user_UpDown >= 20))
 		{
 			//System.out.println("Scenerio 1 Vertical Out of bounds: " + (row1_orig + user_UpDown >= 20));
-			System.out.println("You chosen a value that goes out of bounds for the Y coordinates!");
+			System.out.println("You chosen a value that goes out of bounds for the Y coordinates! Goes past row 20." + "\n");
 			return carGrid;
 		}
 		else if ((user_UpDown < 0) && (row1_orig + user_UpDown < 0))
 		{
 			//System.out.println("Scnerio 2 Vertical Out of bounds: " + (row1_orig + user_UpDown < 0));
-			System.out.println("You chosen a value that goes out of bounds for the Y coordinates!");
+			System.out.println("You chosen a value that goes out of bounds for the Y coordinates! Goes under row 0" + "\n");
 			return carGrid;
 		}
 
