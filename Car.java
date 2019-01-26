@@ -1,18 +1,16 @@
 class Car 
 {
-	public static int carID;                    // This is the car ID Number
-	public static int carColorID;               // This is the car Color ID Number.
-	public static boolean carIgnitionStatus;    // This is the car Ignition Status.
-	public static int row_pos;                  // This is Integer row position of car.
-	public static int col_pos; 					// This is Integer column position of car.
-	public static String colorSymbol;    		// The string Letter representation of the car Color
-	public static String colorString;			// The string entire text representation of the car Color.
+	public  int carID;                    // This is the car ID Number
+	public  int carColorID;               // This is the car Color ID Number.
+	public  boolean carIgnitionStatus;    // This is the car Ignition Status.
+	public  int row_pos;                  // This is Integer row position of car.
+	public  int col_pos; 					// This is Integer column position of car.
+	public  String colorSymbol;    		// The string Letter representation of the car Color
+	public  String colorString;			// The string entire text representation of the car Color.
 
-	public Car(int int1)
+	public Car()
 	{
-		//System.out.println(int1);
-		carID = setcarID(int1);
-		carIgnitionStatus = setcarIgnitionStatus();
+		carIgnitionStatus = setcarIgnitionStatus(); //we are initially setting the car ignition status here. Here it is set to FALSE.
 		carColorID = setcarColorID();
 		row_pos = setRowPosition();
 		col_pos = setColPosition();
@@ -47,19 +45,12 @@ class Car
 		}		
 	}
 
-	public int setcarID(int int1) 
-	{
-		return int1;
-	}
-
-	public int getcarID() 
-	{
-		return carID;
-	}
-
 	public boolean setcarIgnitionStatus()
 	{
-		return false;
+		{
+			return false;
+		}
+		
 	}
 
 	public boolean getcarIgnitionStatus()
@@ -79,7 +70,12 @@ class Car
 
 	public void toggleCarIgnitionStatus()
 	{
-		carIgnitionStatus = !(setcarIgnitionStatus());
+		if (carIgnitionStatus == false) {
+			carIgnitionStatus = true;
+		}
+		else {
+			carIgnitionStatus = false;
+		}
 	}
 
 	public int setcarColorID()
@@ -168,11 +164,11 @@ class Car
 	}
 
 	public String toString() {
-		return ("Car Stats:     " + "\n" +
+		return (
 //			   "Car Number:    " + getcarID() + "\n" +
-			   "Color:         " + getColorString() + "\n" + 
+			   "Color:         " + colorString + "\n" + 
 			   "Ignition:      " + getcarIgnitionString() + "\n" +
-			   "Location:      " + getColPosition() + "," + getRowPosition() + "\n\n" +
+			   "Location:      " + col_pos + "," + row_pos + "\n\n" +
 			   getGrid());
 	}
 
